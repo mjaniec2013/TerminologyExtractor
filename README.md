@@ -1,4 +1,4 @@
-# Automatic Extraction and Representation of Cognitive Science Terminology
+# Automatic Extraction and Representation of Scientific Terminology
 Final project for *Introduction to Computer Programming with Python* class (year 2022/23).
 
 ## Table of Contents
@@ -17,8 +17,7 @@ domain, as well as their systematic organization"*. For it to be relevant for a 
 displaying the characteristics of *low ambiguity* and *high specificity*.  
   
 Extracting terminology from a domain-specific corpus provides enhancement and organization of existing knowledge, and acquisition of new data; 
-the purpose of this project is to provide a tool for terminology extraction adapted for English-language scientific papers 
-from the domain of cognitive science.   
+the purpose of this project is to provide a tool for terminology extraction adapted for English-language scientific papers.   
 
 ## Aim and Scope
 
@@ -28,7 +27,7 @@ facilitate terminology extraction for the creation of databanks.
 Terminology extraction can be approached with different metholodogies, mainly: manual research of terms, statistical approaches, 
 linguistic approach and hybrid approaches between statistical and linguistic methods. This tool will rely on **linguistic methods**. 
 It extracts data:
-* from an unstructured text (in this case, a cognitive science article);
+* from an unstructured text (in this case, a scientific article);
 * of different categories for a terminology entry template.
 Entries are represented using data visualization and/or a GUI to allow editing of extracted data.
 
