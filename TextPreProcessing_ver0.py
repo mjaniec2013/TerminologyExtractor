@@ -1,6 +1,6 @@
 # Text Pre-Processing: Lowercasing, tokenization, POS tagging, phrase chunking, lemmatization.
-
-import fitz, nltk, re, string
+# cd Documents/GitHub/CogSciTerminology
+import fitz, nltk, re
 
 
 def pdf_to_text(document):
@@ -21,65 +21,56 @@ def clean_text(document):
     lowercase = document.lower()
     # Substitute word divisions with empty string
     word_division = re.findall(r'.-\n.', lowercase)
+    text = ''
     if word_division != None:
-        lowercase = re.sub(r'-\n', '', lowercase)
-    # Substitute punctuation with a space
-    no_punct = re.sub(r'[^\w\s\-]|[\n\r]', ' ', lowercase)
-    # Remove double spacing
-    no_punct = re.sub(r'\s+', ' ', no_punct)
+        text = re.sub(r'-\n', '', lowercase)
+    else:
+        text = lowercase
+    # Substitute break lines with a space
+    no_breakline = re.sub(r'\n', ' ', text)
+    # Split the text into sentences
+    sentences = re.findall(r'[^.!?]+', no_breakline)
 
-    return no_punct
+    return sentences
 
 
-def pos_tagging(document):
-    '''Removes punctuation and returns tagged tokens.
+def pos_tagging(sentence_list):
+    '''Takes in a list of sentences, removes punctuation and returns tagged tokens.
     '''
-    # Tokenize text
-    tokens = nltk.word_tokenize(text)
-    sentences = nltk.sent_tokenize(text)
-    # Filters out everything that is not alphabetic
-    filtered = [token for token in tokens if token.isalpha()]
-    # POS tagging tokens
-    tagged = nltk.pos_tag(filtered)
+    # Tokenize sentences into words
+    tokens = []
+    # Split sentences from sentence list and remove empty strings from token list
+    for sentence in sentence_list:
+        word_token = sentence.split(' ')
+        clean_token = [t for t in word_token if t != '']
+        tokens.append(clean_token)
+    # POS tag tokens
+    tagged = [nltk.pos_tag(token) for token in tokens if token != '']
 
-    #    for sentence in sentences:
-    #        sentence_tokens = nltk.word_tokenize(sentence)
-    # Find the tagged tokens that belong to the sentence
-    #        sentence_tagged_tokens = [tagged for tagged in tagged if tagged[0] in sentence_tokens]
-    #    return sentence_tagged_tokens
     return tagged
 
-
-#    print(sentences)
-
-file = 'sample1.pdf'
-print(clean_text(pdf_to_text(file)))
-
-
-# print(pos_tagging(clean_text(pdf_to_text((file)))))
-
-def chunking(document):
+def chunking(tagged_sents):
     '''
     '''
 
     # defines grammar for chunking noun phrases
-    chunk_grammar_rules = r'''
+    chunk_grammar_rules = r"""
         NP: {<DT\$>?<JJ>*<NN.*>+} # noun phrase
             {<DT\$>?<JJ>*<NN.*>*<of><JJ>*<NN.*>*}
-	    '''
-    chunk_parser = nltk.RegexpParser(chunk_grammar_rules)
-    chunked = chunk_parser.parse(tagged)  # chunk tagged tokens
-    # print(chunked)
+	    """
+    chunker = nltk.RegexpParser(chunk_grammar_rules)
+    chunked_sents = [chunker.parse(tagged_sent) for tagged_sent in tagged_sents]
+
+    return chunked_sents
 
 
-def get_chunks(chunked, chunk_type='NP'):
+def get_chunks(chunked):
     all_chunks = []
     # chunked sentences are in the form of nested trees
     for tree in chunked:
         chunks = []
         # iterate through subtrees / leaves to get individual chunks
-        raw_chunks = [subtree.leaves() for subtree in tree.subtrees()
-                      if subtree.node == chunk_type]
+        raw_chunks = [subtree.leaves() for subtree in tree.subtrees() if subtree.label() == 'NP']
         for raw_chunk in raw_chunks:
             chunk = []
             for word_tag in raw_chunk:
@@ -89,4 +80,11 @@ def get_chunks(chunked, chunk_type='NP'):
         all_chunks.append(chunks)
 
     return all_chunks
-# print(get_chunks(chunked))
+
+file = 'sample1.pdf'
+txt = pdf_to_text(file)
+clean = clean_text(txt)
+tagged = pos_tagging(clean)
+chunks = chunking(tagged)
+term_cand = get_chunks(chunks)
+print(term_cand)
