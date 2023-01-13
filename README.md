@@ -11,7 +11,7 @@
 ## Description
    
 This NLP-based terminology extractor enables fast and clear representation of terminology used in English-language scientific papers. <br>
-Relying on regex patterns, it extracts data from an unstructured text — in this case, a scientific article in .pdf format. <br>
+Relying on regex patterns, it extracts terminology candidates together with their definitions and context from an unstructured text — in this case, a scientific article in .pdf format. <br>
 A GUI — **optimized for macOS** — allows for browsing through directories, selecting the file and displaying terminology candidates, their possible definitions and context sentences in which they occur.
 ![Image 1](screenshot1.png)
 ![Image 2](screenshot2.png)
