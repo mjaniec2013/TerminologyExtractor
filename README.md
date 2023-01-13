@@ -22,7 +22,7 @@ A GUI — **optimized for macOS** — allows for browsing through directories, s
 * NLTK — suite of libraries for symbolic and statistical NLP
 * re — module supporting use of regex
 * os — module providing functions for interacting with the operating system
-* TKInter — Python interface to Tcl/Tk GUI toolkit
+* Tkinter — Python interface to Tcl/Tk GUI toolkit
 
 ## Setup and usage
 Clone this repo and install the required libraries. Run the full script by running `GUI.py` or access each module by running them individually. 
