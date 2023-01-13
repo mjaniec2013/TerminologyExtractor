@@ -20,7 +20,7 @@ A GUI — **optimized for macOS** — allows for browsing through directories, s
 * Python 3.10.1
 * PyMuPDF — Python binding for MuPDF, a lightweight PDF viewer, renderer, and toolkit
 * NLTK — suite of libraries for symbolic and statistical NLP
-* Re — module supporting use of regex
+* re — module supporting use of regex
 * os — module providing functions for interacting with the operating system
 * TKInter — Python interface to Tcl/Tk GUI toolkit
 
