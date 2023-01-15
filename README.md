@@ -25,7 +25,7 @@ A GUI — **optimized for macOS** — allows for browsing through directories, s
 * Tkinter — Python interface to Tcl/Tk GUI toolkit
 
 ## Setup and usage
-Clone this repo and install the required libraries. Run the full script by running `GUI.py` or access each module by running them individually. 
+Clone this repo and install the required libraries. Run the full code by running `GUI.py` or access each module by running them individually. 
 
 ## Inspiration
 Inspired by SketchEngine's [OneClickTerms](https://terms.sketchengine.eu/how-does-it-work).
